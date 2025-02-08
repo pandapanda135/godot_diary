@@ -45,6 +45,7 @@ offset_right = 410.0
 offset_bottom = 123.0
 
 [node name="AddTable" type="Button" parent="."]
+layout_mode = 0
 offset_left = 9.0
 offset_top = 263.0
 offset_right = 149.0
@@ -52,13 +53,21 @@ offset_bottom = 294.0
 text = "add row
 "
 
-[node name="TestInt" type="TextEdit" parent="."]
+[node name="MainText" type="TextEdit" parent="."]
+layout_mode = 0
 offset_left = 221.0
 offset_top = 247.0
 offset_right = 410.0
 offset_bottom = 322.0
 
+[node name="OptionalText" type="TextEdit" parent="."]
+offset_left = 500.0
+offset_top = 247.0
+offset_right = 689.0
+offset_bottom = 322.0
+
 [node name="DeleteData" type="Button" parent="."]
+layout_mode = 0
 offset_left = 9.0
 offset_top = 443.0
 offset_right = 149.0
@@ -67,7 +76,15 @@ text = "delete row
 "
 
 [node name="DeleteIdInput" type="TextEdit" parent="."]
+layout_mode = 0
 offset_left = 221.0
 offset_top = 427.0
 offset_right = 410.0
 offset_bottom = 502.0
+
+[node name="TableLabel" type="RichTextLabel" parent="."]
+layout_mode = 0
+offset_left = 706.0
+offset_top = 48.0
+offset_right = 883.0
+offset_bottom = 386.0
