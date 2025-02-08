@@ -92,7 +92,7 @@ func _process(delta):
 		print(test[0]["main_text"])
 		var year_test:int = str_to_var(test[0]["year_made"])
 		print(year_test)
-		if year_test % 4 == 0 and year_test % 100 != 0 and year_test % 400 != 0: # check if year divisible by 4
+		if year_test % 4 == 0 and year_test % 100 != 0 and year_test % 400 != 0: # check if year divisible by 4 not divisble by 100 or 400
 			print("first if")
 		elif year_test % 400 == 0:# check if year divisible by 400
 			print("second if")
