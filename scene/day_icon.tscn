@@ -1,4 +1,6 @@
-[gd_scene format=3 uid="uid://dyyagi0bpxstb"]
+[gd_scene load_steps=2 format=3 uid="uid://dyyagi0bpxstb"]
+
+[ext_resource type="Script" path="res://scripts/day_icon.gd" id="1_hfs6n"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -8,6 +10,7 @@ grow_horizontal = 2
 grow_vertical = 2
 size_flags_horizontal = 6
 size_flags_vertical = 6
+script = ExtResource("1_hfs6n")
 metadata/_edit_use_anchors_ = true
 
 [node name="DateLabel" type="Label" parent="."]

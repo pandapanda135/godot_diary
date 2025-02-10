@@ -16,7 +16,20 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5krrb")
 
-[node name="MonthName" type="Label" parent="."]
+[node name="YearLabel" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -35.0
+offset_top = 39.0
+offset_right = 35.0
+offset_bottom = 84.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 32
+text = "Year"
+
+[node name="MonthLabel" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
