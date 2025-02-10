@@ -4,7 +4,7 @@ extends Node
 @onready var year_label:Control = $"/root/CalendarHandler/YearLabel"
 @onready var month_label:Control = $"/root/CalendarHandler/MonthLabel"
 
-var date_dict = Time.get_date_dict_from_system()
+var date_dict:Dictionary = Time.get_date_dict_from_system()
 
 @export var current_month:int = date_dict["month"]
 
@@ -37,8 +37,10 @@ func populate_container() -> void:
 	year_label.text = str(calendar_handler.current_year)
 	month_label.text = str(current_month)
 
-	for node in self.get_children(): #handles removing children on change
-		node.queue_free()
+	for node:Node in self.get_children(): #handles removing children on change
+		remove_child(node)
+		node.call_deferred("free")
+
 	if calendar_handler.current_month == Time.MONTH_FEBRUARY:
 		if calendar_handler.current_year % 4 == 0 and calendar_handler.current_year % 100 != 0 and calendar_handler.current_year % 400 != 0: # check if year divisible by 4 not divisble by 100 or 400
 			day_count[2] += 1
@@ -51,12 +53,35 @@ func populate_container() -> void:
 	for date:int in day_count[current_month]: # handles spawning nodes
 		date += 1 # starts at 0 so add 1
 		var day_icon_node:Node = day_icon.instantiate()
-		day_icon_node.name = "Day%s" % date
 		day_icon_node.get_node("DateLabel").text = str(date)
+		day_icon_node.delay_time = float(date) / 100
+		day_icon_node.name = "Day%s" % date
 		if calendar_handler.current_year == date_dict["year"] and calendar_handler.current_month == date_dict["month"] and date == date_dict["day"]: #TODO: improve this please maybe move all code to do with changing the month/year to another script
 			day_icon_node.get_node("CurrentDayBackGround").visible = true
 			print("setting %s as current date node" % day_icon_node.name)
 
 		print("adding %s" % day_icon_node.name)
 		self.add_child(day_icon_node)
-		await get_tree().create_timer(0.01).timeout #TODO: fix issue of still spawning children while changing month / year if delay is removed it stops
+		print("THIS IS DATE",date)
+		# day_icon_node.name = "Day%s" % date
+
+	hightlight_icon()
+
+
+var logs_verbosity = SQLite.QUIET
+var db_name: String = "res://data" #convert this to user so it saves in build
+var db = SQLite.new()
+
+func hightlight_icon() -> void:
+	db.path = db_name
+	db.verbosity_level = logs_verbosity
+	db.open_db()
+
+	var diary_data:Dictionary = calendar_handler.return_diary_data()
+
+	for data:int in diary_data:
+		var nested_dict:Dictionary = diary_data[data]
+		if nested_dict["year_made"] == str(calendar_handler.current_year) and nested_dict["month_made"] == str(calendar_handler.current_month) and self.get_node("Day%s" % nested_dict["day_made"]) != null:
+			var node:Control = self.get_node("Day%s" % nested_dict["day_made"])
+			node.get_node("EntryLabel").visible = true
+	db.close_db()

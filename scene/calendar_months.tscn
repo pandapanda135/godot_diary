@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://cakah0vnvca6s"]
+[gd_scene load_steps=8 format=3 uid="uid://cakah0vnvca6s"]
 
 [ext_resource type="Script" path="res://scripts/calendar_ui_handler.gd" id="1_5krrb"]
 [ext_resource type="Script" path="res://scripts/day_icon_handler.gd" id="2_056d3"]
+[ext_resource type="Script" path="res://scripts/database.gd" id="2_mkjo7"]
 [ext_resource type="Script" path="res://scripts/Buttons/month_forward.gd" id="3_xtw1u"]
 [ext_resource type="Script" path="res://scripts/Buttons/year_forward.gd" id="4_s1sxc"]
 [ext_resource type="Script" path="res://scripts/Buttons/month_back.gd" id="5_xn7y4"]
@@ -15,6 +16,9 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_5krrb")
+
+[node name="Node" type="Node" parent="."]
+script = ExtResource("2_mkjo7")
 
 [node name="YearLabel" type="Label" parent="."]
 layout_mode = 1
@@ -34,10 +38,10 @@ layout_mode = 1
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
-offset_left = -51.0
-offset_top = 76.0
-offset_right = 51.0
-offset_bottom = 99.0
+offset_left = -8.0
+offset_top = 87.0
+offset_right = 94.0
+offset_bottom = 110.0
 grow_horizontal = 2
 text = "Month Name"
 
@@ -55,21 +59,28 @@ script = ExtResource("2_056d3")
 metadata/_edit_use_anchors_ = true
 
 [node name="MonthForward" type="Button" parent="."]
-layout_mode = 0
-offset_left = 819.0
-offset_top = 67.0
-offset_right = 971.0
-offset_bottom = 98.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -378.0
+offset_top = 79.0
+offset_right = -226.0
+offset_bottom = 110.0
+grow_horizontal = 0
 text = "Advance month +1
 "
 script = ExtResource("3_xtw1u")
 
 [node name="YearForward" type="Button" parent="."]
-layout_mode = 0
-offset_left = 993.0
-offset_top = 67.0
-offset_right = 1145.0
-offset_bottom = 98.0
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -152.0
+offset_top = 79.0
+offset_bottom = 110.0
+grow_horizontal = 0
 text = "Advance year +1
 "
 script = ExtResource("4_s1sxc")
