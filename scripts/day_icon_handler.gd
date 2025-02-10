@@ -60,10 +60,7 @@ func populate_container() -> void:
 			day_icon_node.get_node("CurrentDayBackGround").visible = true
 			print("setting %s as current date node" % day_icon_node.name)
 
-		print("adding %s" % day_icon_node.name)
 		self.add_child(day_icon_node)
-		print("THIS IS DATE",date)
-		# day_icon_node.name = "Day%s" % date
 
 	hightlight_icon()
 
@@ -83,5 +80,6 @@ func hightlight_icon() -> void:
 		var nested_dict:Dictionary = diary_data[data]
 		if nested_dict["year_made"] == str(calendar_handler.current_year) and nested_dict["month_made"] == str(calendar_handler.current_month) and self.get_node("Day%s" % nested_dict["day_made"]) != null:
 			var node:Control = self.get_node("Day%s" % nested_dict["day_made"])
+			node.sqlite_id = nested_dict["id"]
 			node.get_node("EntryLabel").visible = true
 	db.close_db()

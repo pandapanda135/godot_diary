@@ -15,6 +15,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 1
 script = ExtResource("1_5krrb")
 
 [node name="Node" type="Node" parent="."]
@@ -58,8 +59,9 @@ columns = 4
 script = ExtResource("2_056d3")
 metadata/_edit_use_anchors_ = true
 
-[node name="MonthForward" type="Button" parent="."]
-layout_mode = 1
+[node name="Buttons" type="Node" parent="."]
+
+[node name="MonthForward" type="Button" parent="Buttons"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -72,8 +74,7 @@ text = "Advance month +1
 "
 script = ExtResource("3_xtw1u")
 
-[node name="YearForward" type="Button" parent="."]
-layout_mode = 1
+[node name="YearForward" type="Button" parent="Buttons"]
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -85,8 +86,7 @@ text = "Advance year +1
 "
 script = ExtResource("4_s1sxc")
 
-[node name="MonthBack" type="Button" parent="."]
-layout_mode = 0
+[node name="MonthBack" type="Button" parent="Buttons"]
 offset_left = 158.0
 offset_top = 69.0
 offset_right = 306.0
@@ -95,8 +95,7 @@ text = "Advance month -1
 "
 script = ExtResource("5_xn7y4")
 
-[node name="YearBack" type="Button" parent="."]
-layout_mode = 0
+[node name="YearBack" type="Button" parent="Buttons"]
 offset_left = 6.0
 offset_top = 68.0
 offset_right = 154.0

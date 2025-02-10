@@ -4,14 +4,28 @@
 
 [node name="Main" type="Control"]
 layout_mode = 3
-anchor_right = 0.0555556
-anchor_bottom = 0.0987654
-grow_horizontal = 2
-grow_vertical = 2
+anchors_preset = 0
+offset_right = 64.0
+offset_bottom = 64.0
 size_flags_horizontal = 6
 size_flags_vertical = 6
 script = ExtResource("1_hfs6n")
 metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -29.0
+offset_top = -31.0
+offset_right = 29.0
+offset_bottom = 31.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
 
 [node name="DateLabel" type="Label" parent="."]
 modulate = Color(0, 0, 0, 1)
@@ -24,6 +38,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_font_sizes/font_size = 32
 text = "DAY"
+metadata/_edit_use_anchors_ = true
 
 [node name="CurrentDayBackGround" type="ColorRect" parent="."]
 visible = false
@@ -39,6 +54,7 @@ offset_right = 35.0
 offset_bottom = 27.0
 grow_horizontal = 2
 grow_vertical = 2
+mouse_filter = 2
 color = Color(0.960998, 0.482503, 0.0686201, 1)
 
 [node name="EntryLabel" type="Label" parent="."]
