@@ -3,15 +3,15 @@ extends Control
 var date_dict:Dictionary = Time.get_date_dict_from_system()
 #export for testing
 @export var current_year:int = date_dict["year"] # these handle the calendar and are changed if the selected date on the calendar is
-@export var current_month:int = date_dict["month"] # MAKE THIS ENUM FOR TIME ARTICLE GODOT DOCS
+@export var current_month:int = date_dict["month"]
 @export var current_date:int = date_dict["day"]
 
-var logs_verbosity = SQLite.QUIET
-var db_name: String = "res://data" #convert this to user so it saves in build
+var logs_verbosity = SqlSettings.STANDARD_VERBOSITY
+var db_path: String = SqlSettings.DB_PATH #convert this to user so it saves in build
 var db = SQLite.new()
 
 func return_diary_data() -> Dictionary:
-	db.path = db_name
+	db.path = db_path
 	db.verbosity_level = logs_verbosity
 	db.open_db()
 	var diary_data:Dictionary

@@ -12,17 +12,18 @@ func _ready() -> void:
 	tween.parallel().tween_property(self, "scale",Vector2(1,1),0.25).set_trans(Tween.TRANS_QUAD)
 	$Button.pressed.connect(_on_pressed)
 
-var logs_verbosity = SQLite.VERY_VERBOSE
-var db_name: String = "res://data" #convert this to user so it saves in build
+var logs_verbosity = SqlSettings.STANDARD_VERBOSITY
+var db_path: String = SqlSettings.DB_PATH #convert this to user so it saves in build
 var db = SQLite.new()
 
 func _on_pressed() -> void:
-	if $"EntryLabel".visible == true:
-		db.path = db_name
+	if sqlite_id != 0:
+		db.path = db_path
 		db.verbosity_level = logs_verbosity
 		db.open_db()
 
 		var sql_date_made:Array[Dictionary] = db.select_rows("main","id == %s" % str(sqlite_id),["main_text","optional_summary"])
 		print(sql_date_made)
+		db.close_db()
 	else:
-		print("asd")
+		print("sqlite id is 0")

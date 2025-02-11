@@ -25,8 +25,6 @@ var day_count:Dictionary = {
 	12: 31,
 }
 
-#TODO: add way to for node to get its date inacordance to the current month and not have any repeats and also have the current date (can be got from calendar handler) to look special (just change a label for now)
-#TODO: this should be handled in a script on the main node of day_icon
 func _ready() -> void:
 	SignalManager.connect("update_calendar",populate_container)
 	populate_container()
@@ -64,16 +62,7 @@ func populate_container() -> void:
 
 	hightlight_icon()
 
-
-var logs_verbosity = SQLite.QUIET
-var db_name: String = "res://data" #convert this to user so it saves in build
-var db = SQLite.new()
-
 func hightlight_icon() -> void:
-	db.path = db_name
-	db.verbosity_level = logs_verbosity
-	db.open_db()
-
 	var diary_data:Dictionary = calendar_handler.return_diary_data()
 
 	for data:int in diary_data:
@@ -82,4 +71,3 @@ func hightlight_icon() -> void:
 			var node:Control = self.get_node("Day%s" % nested_dict["day_made"])
 			node.sqlite_id = nested_dict["id"]
 			node.get_node("EntryLabel").visible = true
-	db.close_db()

@@ -6,15 +6,15 @@ extends Node
 
 #? maybe make a singleton to keep sqlite settings in as right now its a mess
 
-var logs_verbosity = SQLite.VERY_VERBOSE
+var logs_verbosity = SqlSettings.STANDARD_VERBOSITY
 
 var db:SQLite = null
 
-var db_name := "res://data"
+var db_path := SqlSettings.DB_PATH
 #from demo keep json file for user select backup later
-var packaged_db_name := "res://data_to_be_packaged"
-var peristent_db_name := "user://database" #use for build
-var json_name := "res://data/test_backup"
+var packaged_db_path := SqlSettings.PACKAGED_DB_NAME
+var peristent_db_path := SqlSettings.SAVE_DB_PATH #use for build
+var json_name := SqlSettings.JSON_BACKUP
 
 @onready var create_table_button:Button = $"../CreateTable"
 @onready var add_table_button:Button = $"../AddTable"
@@ -45,7 +45,7 @@ func on_pressed() -> void:
 	}
 
 	db = SQLite.new()
-	db.path = db_name
+	db.path = db_path
 	db.verbosity_level = logs_verbosity
 	db.open_db()
 
@@ -65,7 +65,7 @@ func on_pressed_add_table() -> void:
 	}
 
 	db = SQLite.new()
-	db.path = db_name
+	db.path = db_path
 	db.verbosity_level = logs_verbosity
 	db.open_db()
 
@@ -75,7 +75,7 @@ func on_pressed_add_table() -> void:
 
 func on_pressed_delete_data() -> void:
 	db = SQLite.new()
-	db.path = db_name
+	db.path = db_path
 	db.verbosity_level = logs_verbosity
 	db.open_db()
 

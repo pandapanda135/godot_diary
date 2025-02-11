@@ -23,11 +23,6 @@ text = "This is a test"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="."]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
 [node name="CreateTable" type="Button" parent="."]
 layout_mode = 0
 offset_left = 9.0

@@ -1,8 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://cakah0vnvca6s"]
+[gd_scene load_steps=7 format=3 uid="uid://cakah0vnvca6s"]
 
 [ext_resource type="Script" path="res://scripts/calendar_ui_handler.gd" id="1_5krrb"]
 [ext_resource type="Script" path="res://scripts/day_icon_handler.gd" id="2_056d3"]
-[ext_resource type="Script" path="res://scripts/database.gd" id="2_mkjo7"]
 [ext_resource type="Script" path="res://scripts/Buttons/month_forward.gd" id="3_xtw1u"]
 [ext_resource type="Script" path="res://scripts/Buttons/year_forward.gd" id="4_s1sxc"]
 [ext_resource type="Script" path="res://scripts/Buttons/month_back.gd" id="5_xn7y4"]
@@ -17,9 +16,6 @@ grow_horizontal = 2
 grow_vertical = 2
 mouse_filter = 1
 script = ExtResource("1_5krrb")
-
-[node name="Node" type="Node" parent="."]
-script = ExtResource("2_mkjo7")
 
 [node name="YearLabel" type="Label" parent="."]
 layout_mode = 1
@@ -46,7 +42,7 @@ offset_bottom = 110.0
 grow_horizontal = 2
 text = "Month Name"
 
-[node name="GridContainer" type="GridContainer" parent="."]
+[node name="DayContainer" type="GridContainer" parent="."]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.223958
