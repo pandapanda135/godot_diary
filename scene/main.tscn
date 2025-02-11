@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://4apy4wtf30mn"]
+[gd_scene load_steps=4 format=3 uid="uid://4apy4wtf30mn"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_hri17"]
 [ext_resource type="Script" path="res://scripts/database.gd" id="2_jf3kd"]
+[ext_resource type="Script" path="res://scripts/Buttons/button_class.gd" id="3_7u75w"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -25,58 +26,65 @@ vertical_alignment = 1
 
 [node name="CreateTable" type="Button" parent="."]
 layout_mode = 0
-offset_left = 9.0
-offset_top = 64.0
-offset_right = 149.0
-offset_bottom = 95.0
+anchor_left = 0.0078125
+anchor_top = 0.0987654
+anchor_right = 0.12934
+anchor_bottom = 0.146605
 text = "create table
 "
+metadata/_edit_use_anchors_ = true
 
 [node name="TextEdit" type="TextEdit" parent="."]
 layout_mode = 0
-offset_left = 221.0
-offset_top = 48.0
-offset_right = 410.0
-offset_bottom = 123.0
+anchor_left = 0.19184
+anchor_top = 0.0740741
+anchor_right = 0.355903
+anchor_bottom = 0.189815
+metadata/_edit_use_anchors_ = true
 
 [node name="AddTable" type="Button" parent="."]
 layout_mode = 0
-offset_left = 9.0
-offset_top = 263.0
-offset_right = 149.0
-offset_bottom = 294.0
+anchor_left = 0.0078125
+anchor_top = 0.405864
+anchor_right = 0.12934
+anchor_bottom = 0.453704
 text = "add row
 "
+metadata/_edit_use_anchors_ = true
 
 [node name="MainText" type="TextEdit" parent="."]
 layout_mode = 0
-offset_left = 221.0
-offset_top = 247.0
-offset_right = 410.0
-offset_bottom = 322.0
+anchor_left = 0.19184
+anchor_top = 0.381173
+anchor_right = 0.355903
+anchor_bottom = 0.496914
+metadata/_edit_use_anchors_ = true
 
 [node name="OptionalText" type="TextEdit" parent="."]
 layout_mode = 0
-offset_left = 500.0
-offset_top = 247.0
-offset_right = 689.0
-offset_bottom = 322.0
+anchor_left = 0.434028
+anchor_top = 0.381173
+anchor_right = 0.59809
+anchor_bottom = 0.496914
+metadata/_edit_use_anchors_ = true
 
 [node name="DeleteData" type="Button" parent="."]
 layout_mode = 0
-offset_left = 9.0
-offset_top = 443.0
-offset_right = 149.0
-offset_bottom = 474.0
+anchor_left = 0.0078125
+anchor_top = 0.683642
+anchor_right = 0.12934
+anchor_bottom = 0.731481
 text = "delete row
 "
+metadata/_edit_use_anchors_ = true
 
 [node name="DeleteIdInput" type="TextEdit" parent="."]
 layout_mode = 0
-offset_left = 221.0
-offset_top = 427.0
-offset_right = 410.0
-offset_bottom = 502.0
+anchor_left = 0.19184
+anchor_top = 0.658951
+anchor_right = 0.355903
+anchor_bottom = 0.774691
+metadata/_edit_use_anchors_ = true
 
 [node name="TableLabel" type="RichTextLabel" parent="."]
 layout_mode = 0
@@ -84,3 +92,12 @@ offset_left = 706.0
 offset_top = 48.0
 offset_right = 883.0
 offset_bottom = 386.0
+
+[node name="CalendarButton" type="Button" parent="."]
+layout_mode = 0
+anchor_left = 0.884549
+anchor_right = 1.0
+anchor_bottom = 0.0478395
+text = "Toggle Calendar"
+script = ExtResource("3_7u75w")
+metadata/_edit_use_anchors_ = true

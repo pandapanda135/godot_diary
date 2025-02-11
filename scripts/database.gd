@@ -82,3 +82,14 @@ func on_pressed_delete_data() -> void:
 	db.delete_rows("main", "id = '" + delete_id_input.text + "'") #deletes row based on id inserted
 
 	db.close_db()
+
+func get_text(sqlite_id) -> Array[Dictionary]:
+		db = SQLite.new()
+		db.path = db_path
+		db.verbosity_level = logs_verbosity
+		db.open_db()
+
+		var sql_data:Array[Dictionary] = db.select_rows("main","id == %s" % str(sqlite_id),["*"])
+		print(sql_data)
+		db.close_db()
+		return sql_data

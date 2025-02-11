@@ -53,6 +53,7 @@ func populate_container() -> void:
 		var day_icon_node:Node = day_icon.instantiate()
 		day_icon_node.get_node("DateLabel").text = str(date)
 		day_icon_node.delay_time = float(date) / 100
+		day_icon_node.date = date
 		day_icon_node.name = "Day%s" % date
 		if calendar_handler.current_year == date_dict["year"] and calendar_handler.current_month == date_dict["month"] and date == date_dict["day"]: #TODO: improve this please maybe move all code to do with changing the month/year to another script
 			day_icon_node.get_node("CurrentDayBackGround").visible = true
