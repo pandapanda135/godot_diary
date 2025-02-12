@@ -5,6 +5,7 @@ extends Control
 var delay_time:float
 var sqlite_id:int = 0
 var date:int = -1
+
 func _ready() -> void:
 	self.scale = Vector2(0.1,0.1) # only animates if this value is higher than 1
 	self.modulate.a = 0
@@ -14,9 +15,9 @@ func _ready() -> void:
 	tween.parallel().tween_property(self, "scale",Vector2(1,1),0.25).set_trans(Tween.TRANS_QUAD)
 	$Button.pressed.connect(_on_pressed)
 
-var logs_verbosity = SqlSettings.STANDARD_VERBOSITY
+var logs_verbosity:int = SqlSettings.STANDARD_VERBOSITY
 var db_path: String = SqlSettings.DB_PATH #convert this to user so it saves in build
-var db = SQLite.new()
+var db:SQLite = SQLite.new()
 
 func _on_pressed() -> void: #? maybe use this for fullscreen entry
 	if sqlite_id != 0:
@@ -30,5 +31,17 @@ func _on_pressed() -> void: #? maybe use this for fullscreen entry
 		SqlSettings.current_sqlite_id = sql_date_made[0]["id"]
 		get_tree().change_scene_to_file("res://scene/entry_show.tscn")
 	else:
-		if date > Time.get_date_dict_from_system()["day"] and calendar_handler.current_year > Time.get_date_dict_from_system()["year"] or calendar_handler.current_month > Time.get_date_dict_from_system()["month"]: #? use for making sure cant create entry before day
-			print("larger than current year or month or day") #TODO: fix this dont work
+		var date_dict:Dictionary = Time.get_date_dict_from_system()
+		if calendar_handler.current_year > date_dict["year"]: # handles checking if pressed buttons date is lower than or higher than current day (pls refactor this someday)
+			print("larger")
+		elif calendar_handler.current_year == date_dict["year"] and calendar_handler.current_month >= date_dict["month"] and date > date_dict["day"]:
+			print("larger 2")
+		elif calendar_handler.current_year == date_dict["year"] and calendar_handler.current_month > date_dict["month"] and date <= date_dict["day"]:
+			print("larger 3")
+
+		if calendar_handler.current_year < date_dict["year"]:
+			print("smaller")
+		elif calendar_handler.current_year == date_dict["year"] and calendar_handler.current_month <= date_dict["month"] and date < date_dict["day"]:
+			print("smaller 2")
+		elif calendar_handler.current_year == date_dict["year"] and calendar_handler.current_month < date_dict["month"] and date >= date_dict["day"]:
+			print("smaller 3")
