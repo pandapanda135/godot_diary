@@ -11,9 +11,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_dxr30")
+metadata/_edit_use_anchors_ = true
 
-[node name="DataBase" type="Node" parent="."]
+[node name="DataBase" type="Node" parent="." node_paths=PackedStringArray("main_text_input", "optional_text_input", "submit_entry")]
 script = ExtResource("1_v7np7")
+main_text_input = NodePath("../InsertNodes/BodyTextEdit")
+optional_text_input = NodePath("../InsertNodes/SummaryTextEdit")
+submit_entry = NodePath("../InsertNodes/Button")
 
 [node name="DateLabel" type="Label" parent="."]
 layout_mode = 1
@@ -24,13 +28,14 @@ offset_left = -64.0
 offset_right = 61.0
 offset_bottom = 23.0
 grow_horizontal = 2
-text = "20 january 2024"
+text = "20 january 2024 (test date)"
 
 [node name="DisplayNodes" type="Control" parent="."]
 visible = false
 anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+anchor_right = 0.0347222
+anchor_bottom = 0.0617284
+metadata/_edit_use_anchors_ = true
 
 [node name="BodyLabel" type="RichTextLabel" parent="DisplayNodes"]
 layout_mode = 1
@@ -61,38 +66,41 @@ grow_horizontal = 2
 grow_vertical = 0
 
 [node name="InsertNodes" type="Control" parent="."]
-visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
+layout_mode = 1
+anchor_right = 0.0347222
+anchor_bottom = 0.0617284
+metadata/_edit_use_anchors_ = true
 
 [node name="BodyTextEdit" type="TextEdit" parent="InsertNodes"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = 36.0
-offset_right = 1132.0
-offset_bottom = 556.0
+anchors_preset = -1
+anchor_top = 1.75
+anchor_right = 28.8
+anchor_bottom = 14.75
 grow_horizontal = 2
 grow_vertical = 2
+placeholder_text = "Main text"
+wrap_mode = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="SummaryTextEdit" type="LineEdit" parent="InsertNodes"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 428.0
-offset_top = 576.0
-offset_right = 684.0
-offset_bottom = 608.0
+anchors_preset = -1
+anchor_left = 11.2
+anchor_top = 0.8
+anchor_right = 17.6
+anchor_bottom = 1.575
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+placeholder_text = "Optional summary"
 alignment = 1
 max_length = 60
+metadata/_edit_use_anchors_ = true
+
+[node name="Button" type="Button" parent="InsertNodes"]
+layout_mode = 0
+offset_left = 448.0
+offset_top = 608.0
+offset_right = 704.0
+offset_bottom = 649.0
+text = "Submit"

@@ -4,7 +4,9 @@
 
 [node name="Main" type="Control"]
 layout_mode = 3
-anchors_preset = 0
+anchor_left = -0.000868056
+anchor_top = -0.00154321
+anchor_right = 0.000868056
 offset_right = 64.0
 offset_bottom = 64.0
 size_flags_horizontal = 6
@@ -20,12 +22,13 @@ anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
 offset_left = -32.0
-offset_top = -32.0
-offset_right = 35.0
-offset_bottom = 27.0
+offset_top = -31.5
+offset_right = 32.0
+offset_bottom = 27.5
 grow_horizontal = 2
 grow_vertical = 2
 flat = true
+metadata/_edit_use_anchors_ = true
 
 [node name="DateLabel" type="Label" parent="."]
 modulate = Color(0, 0, 0, 1)
@@ -36,9 +39,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -31.0
+offset_left = -32.0
 offset_top = -32.0
-offset_right = 34.0
+offset_right = 32.0
 offset_bottom = 13.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -46,6 +49,7 @@ theme_override_font_sizes/font_size = 32
 text = "DAY"
 horizontal_alignment = 1
 vertical_alignment = 1
+metadata/_edit_use_anchors_ = true
 
 [node name="CurrentDayBackGround" type="ColorRect" parent="."]
 visible = false
@@ -79,3 +83,36 @@ offset_bottom = 25.0
 grow_horizontal = 2
 grow_vertical = 2
 text = "has entry"
+
+[node name="HoverControl" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -32.0
+offset_right = 34.0
+offset_bottom = 38.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="HoverContainer" type="HFlowContainer" parent="HoverControl"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = -0.242424
+anchor_top = 0.0131579
+anchor_right = 1.21212
+anchor_bottom = 1.09211
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="NewButton" type="Button" parent="HoverControl/HoverContainer"]
+layout_mode = 2
+text = "New"
+
+[node name="ViewButton" type="Button" parent="HoverControl/HoverContainer"]
+layout_mode = 2
+text = "View"

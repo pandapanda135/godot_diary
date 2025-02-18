@@ -13,7 +13,9 @@ extends Control
 @onready var insert_summary:LineEdit = $InsertNodes/SummaryTextEdit
 
 func _ready() -> void:
-	if SqlSettings.current_sqlite_id != 0:
+	if SqlSettings.current_sqlite_id == 0: # insert entry
+		insert_nodes.visible = true
+	else: # display entry
 		var sqlite_data_array:Array[Dictionary] = db.get_text(SqlSettings.current_sqlite_id)
 		var sqlite_data:Dictionary = sqlite_data_array[0]
 
@@ -22,5 +24,3 @@ func _ready() -> void:
 		date_label.text = str(sqlite_data["year_made"], " ", sqlite_data["month_made"]," ", sqlite_data["day_made"])
 		body_text_node.text = str(sqlite_data["main_text"])
 		summary_node.text = str(sqlite_data["optional_summary"])
-	else:
-		insert_nodes.visible = true

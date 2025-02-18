@@ -19,18 +19,19 @@ var json_name := SqlSettings.JSON_BACKUP
 @onready var create_table_button:Button = $"../CreateTable"
 @onready var add_table_button:Button = $"../AddTable"
 
-@onready var main_text_input:TextEdit = $"../MainText"
-@onready var optional_text_input:TextEdit = $"../OptionalText"
-
 @onready var delete_data_button:Button = $"../DeleteData"
 @onready var delete_id_input:TextEdit = $"../DeleteIdInput"
 
 @onready var table_label:RichTextLabel = $"../TableLabel"
 
+@export var main_text_input:TextEdit
+@export var optional_text_input:LineEdit
+@export var submit_entry:Button
+
 func _ready() -> void:
+	submit_entry.pressed.connect(on_pressed_add_table)
 	pass
 	# create_table_button.pressed.connect(on_pressed)
-	# add_table_button.pressed.connect(on_pressed_add_table)
 	# delete_data_button.pressed.connect(on_pressed_delete_data)
 
 func on_pressed() -> void:
