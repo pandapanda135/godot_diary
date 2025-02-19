@@ -1,4 +1,4 @@
-extends Node
+class_name Database extends Node
 
 # maybe use later as used in demo
 # signal output_received
@@ -6,15 +6,15 @@ extends Node
 
 #? maybe make a singleton to keep sqlite settings in as right now its a mess
 
-var logs_verbosity = SqlSettings.STANDARD_VERBOSITY
+static var logs_verbosity = SqlSettings.STANDARD_VERBOSITY
 
-var db:SQLite = null
+static var db:SQLite = null
 
-var db_path := SqlSettings.DB_PATH
+static var db_path := SqlSettings.DB_PATH
 #from demo keep json file for user select backup later
-var packaged_db_path := SqlSettings.PACKAGED_DB_NAME
-var peristent_db_path := SqlSettings.SAVE_DB_PATH #use for build
-var json_name := SqlSettings.JSON_BACKUP
+static var packaged_db_path := SqlSettings.PACKAGED_DB_NAME
+static var peristent_db_path := SqlSettings.SAVE_DB_PATH #use for build
+static var json_name := SqlSettings.JSON_BACKUP
 
 @onready var create_table_button:Button = $"../CreateTable"
 @onready var add_table_button:Button = $"../AddTable"
@@ -34,7 +34,7 @@ func _ready() -> void:
 	# create_table_button.pressed.connect(on_pressed)
 	# delete_data_button.pressed.connect(on_pressed_delete_data)
 
-func on_pressed() -> void:
+static func create_table(input_name:String = "main") -> void:
 	var table:Dictionary = {
 		"id": {"data_type": "int", "primary_key": true , "not_null" : true , "auto_increment": true},
 		"main_text": {"data_type": "text","not_null": true},
@@ -50,7 +50,7 @@ func on_pressed() -> void:
 	db.verbosity_level = logs_verbosity
 	db.open_db()
 
-	db.create_table("main",table)
+	db.create_table(input_name,table)
 
 	db.close_db()
 

@@ -17,7 +17,7 @@ metadata/_edit_use_anchors_ = true
 script = ExtResource("1_v7np7")
 main_text_input = NodePath("../InsertNodes/BodyTextEdit")
 optional_text_input = NodePath("../InsertNodes/SummaryTextEdit")
-submit_entry = NodePath("../InsertNodes/Button")
+submit_entry = NodePath("../InsertNodes/SubmitButton")
 
 [node name="DateLabel" type="Label" parent="."]
 layout_mode = 1
@@ -31,7 +31,6 @@ grow_horizontal = 2
 text = "20 january 2024 (test date)"
 
 [node name="DisplayNodes" type="Control" parent="."]
-visible = false
 anchors_preset = 0
 anchor_right = 0.0347222
 anchor_bottom = 0.0617284
@@ -39,33 +38,27 @@ metadata/_edit_use_anchors_ = true
 
 [node name="BodyLabel" type="RichTextLabel" parent="DisplayNodes"]
 layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -20.0
-offset_top = 36.0
-offset_right = 1132.0
-offset_bottom = 556.0
+anchors_preset = -1
+anchor_top = 1.8
+anchor_right = 28.8
+anchor_bottom = 14.8
 grow_horizontal = 2
 grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
-[node name="SummaryLabel" type="RichTextLabel" parent="DisplayNodes"]
+[node name="SummaryLabel" type="Label" parent="DisplayNodes"]
 layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 428.0
-offset_top = 576.0
-offset_right = 684.0
-offset_bottom = 608.0
+anchors_preset = -1
+anchor_left = 11.2
+anchor_top = 0.8
+anchor_right = 17.6
+anchor_bottom = 1.6
 grow_horizontal = 2
-grow_vertical = 0
+grow_vertical = 2
+metadata/_edit_use_anchors_ = true
 
 [node name="InsertNodes" type="Control" parent="."]
+visible = false
 layout_mode = 1
 anchor_right = 0.0347222
 anchor_bottom = 0.0617284
@@ -97,10 +90,21 @@ alignment = 1
 max_length = 60
 metadata/_edit_use_anchors_ = true
 
-[node name="Button" type="Button" parent="InsertNodes"]
+[node name="SubmitButton" type="Button" parent="InsertNodes"]
 layout_mode = 0
-offset_left = 448.0
-offset_top = 608.0
-offset_right = 704.0
-offset_bottom = 649.0
+anchor_left = 11.2
+anchor_top = 15.2
+anchor_right = 17.6
+anchor_bottom = 16.225
 text = "Submit"
+metadata/_edit_use_anchors_ = true
+
+[node name="BackButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 0.0390625
+anchor_bottom = 0.0478395
+offset_right = -37.0
+offset_bottom = -23.0
+text = "Back"
+metadata/_edit_use_anchors_ = true

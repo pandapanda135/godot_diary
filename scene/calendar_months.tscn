@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://cakah0vnvca6s"]
+[gd_scene load_steps=9 format=3 uid="uid://cakah0vnvca6s"]
 
 [ext_resource type="Script" path="res://scripts/calendar_ui_handler.gd" id="1_5krrb"]
 [ext_resource type="Script" path="res://scripts/day_icon_handler.gd" id="2_056d3"]
@@ -7,6 +7,7 @@
 [ext_resource type="Script" path="res://scripts/Buttons/month_back.gd" id="5_xn7y4"]
 [ext_resource type="Script" path="res://scripts/Buttons/year_back.gd" id="6_78v4j"]
 [ext_resource type="Script" path="res://scripts/Buttons/table_select_button.gd" id="7_7kbu1"]
+[ext_resource type="Script" path="res://scripts/new_table_button.gd" id="8_uw41u"]
 
 [node name="CalendarHandler" type="Control"]
 layout_mode = 3
@@ -103,7 +104,24 @@ text = "Advance year -1
 "
 script = ExtResource("6_78v4j")
 
-[node name="Button" type="OptionButton" parent="Buttons"]
-offset_right = 128.0
-offset_bottom = 31.0
+[node name="TableController" type="HBoxContainer" parent="Buttons"]
+offset_right = 311.0
+offset_bottom = 40.0
+
+[node name="TableSelectButton" type="OptionButton" parent="Buttons/TableController"]
+layout_mode = 2
 script = ExtResource("7_7kbu1")
+metadata/_edit_use_anchors_ = true
+
+[node name="NewTableButton" type="Button" parent="Buttons/TableController"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+text = "New table"
+script = ExtResource("8_uw41u")
+
+[node name="TableName" type="LineEdit" parent="Buttons/TableController"]
+layout_mode = 2
+placeholder_text = "Enter new Table Name"
+max_length = 15
+expand_to_text_length = true

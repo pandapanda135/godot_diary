@@ -1,11 +1,17 @@
 extends OptionButton
 
+@onready var calendar_handler:Control = $"/root/CalendarHandler"
 
-# Called when the node enters the scene tree for the first time.
-func _ready() -> void:
-	pass # Replace with function body.
+func _ready():
+	_on_pressed()
+	self.pressed.connect(_on_pressed)
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta: float) -> void:
-	pass
+func _on_pressed() -> void:
+	var current_index:int = self.get_selected_id()
+	print("running on pressed")
+	var current_tables:Array[Dictionary] = calendar_handler.return_all_tables()
+	self.clear()
+	for i:int in len(current_tables):
+		if current_tables[i]["tbl_name"] != "sqlite_sequence":
+			self.add_item(current_tables[i]["tbl_name"])
+	self.selected = current_index

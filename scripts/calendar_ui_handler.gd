@@ -27,20 +27,12 @@ func return_diary_data() -> Dictionary:
 	db.close_db()
 	return diary_data
 
-
-func return_all_tables() -> void:
+func return_all_tables() -> Array[Dictionary]:
 	db.path = db_path
 	db.verbosity_level = logs_verbosity
 	db.open_db()
-	var table_data:Dictionary
 
-	var table_name = "name"
-	var column_name = "sqlite_master"
-	var select_type = "type='table'"
-	# var query_result = db.query("SELECT "+ table_name +" FROM "+ column_name +" WHERE type='table'")
-	var query_result_2 = db.select_rows(column_name,"SELECT "+ table_name +" FROM "+ column_name +" WHERE " + select_type,["*"]) #todo: find why this produces two queries
-	print(query_result_2)
+	var column_name:String = "sqlite_master"
+	var query_result:Array[Dictionary] = db.select_rows(column_name,"",["tbl_name"])
 	db.close_db()
-
-func _ready():
-	return_all_tables()
+	return query_result
