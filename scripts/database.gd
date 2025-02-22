@@ -65,7 +65,7 @@ func on_pressed_add_to_table(main_text_input:TextEdit,optional_text_input:LineEd
 	db.verbosity_level = logs_verbosity
 	db.open_db()
 
-	db.insert_row("main", data)
+	db.insert_row("%s" % SqlSettings.current_table, data)
 
 	db.close_db()
 
@@ -75,8 +75,8 @@ func delete_data(id) -> bool:
 	db.verbosity_level = logs_verbosity
 	db.open_db()
 
-	if db.delete_rows("main", "id = '" + id + "'") == true:
-		db.delete_rows("main", "id = '" + id + "'")
+	if db.delete_rows("%s", "id = '" + id + "'" % SqlSettings.current_table) == true:
+		db.delete_rows("%s", "id = '" + id + "'" % SqlSettings.current_table)
 	else:
 		return false
 	db.close_db()
@@ -88,7 +88,7 @@ func get_text(sqlite_id) -> Array[Dictionary]:
 		db.verbosity_level = logs_verbosity
 		db.open_db()
 
-		var sql_data:Array[Dictionary] = db.select_rows("main","id == %s" % str(sqlite_id),["*"])
+		var sql_data:Array[Dictionary] = db.select_rows("%s" % SqlSettings.current_table,"id == %s" % str(sqlite_id),["*"])
 		print(sql_data)
 		db.close_db()
 		return sql_data

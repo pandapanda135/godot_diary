@@ -66,8 +66,6 @@ func populate_container() -> void:
 func hightlight_icon() -> void:
 	var diary_data:Dictionary = calendar_handler.return_diary_data()
 	print(diary_data.keys())
-	print(diary_data[1])
-	print(diary_data[2])
 	for data:int in diary_data: # data = sqlite_id
 		var nested_dict:Dictionary = diary_data[data]
 		if nested_dict["year_made"] == str(calendar_handler.current_year) and nested_dict["month_made"] == str(calendar_handler.current_month) and self.get_node("Day%s" % nested_dict["day_made"]) != null:

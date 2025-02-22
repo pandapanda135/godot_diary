@@ -17,7 +17,7 @@ func return_diary_data() -> Dictionary:
 	var diary_data:Dictionary
 
 	# handles getting all data in main table
-	var sql_date_made:Array[Dictionary] = db.select_rows("main","",["id","year_made","month_made","day_made"])
+	var sql_date_made:Array[Dictionary] = db.select_rows("%s" % SqlSettings.current_table,"",["id","year_made","month_made","day_made"])
 	for data:Dictionary in sql_date_made:
 		if diary_data.find_key(data["id"]) == null: # if doesnt exist
 			print("first if ", data)
