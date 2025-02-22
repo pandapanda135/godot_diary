@@ -5,6 +5,10 @@ extends OptionButton
 func _ready():
 	_on_pressed()
 	self.pressed.connect(_on_pressed)
+	if self.item_count <= 0:
+		print("no tables")
+	else:
+		self.selected = 0
 
 func _on_pressed() -> void:
 	var current_index:int = self.get_selected_id()

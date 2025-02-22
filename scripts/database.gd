@@ -24,12 +24,7 @@ static var json_name := SqlSettings.JSON_BACKUP
 
 @onready var table_label:RichTextLabel = $"../TableLabel"
 
-@export var main_text_input:TextEdit
-@export var optional_text_input:LineEdit
-@export var submit_entry:Button
-
 func _ready() -> void:
-	submit_entry.pressed.connect(on_pressed_add_table)
 	pass
 	# create_table_button.pressed.connect(on_pressed)
 	# delete_data_button.pressed.connect(on_pressed_delete_data)
@@ -54,7 +49,7 @@ static func create_table(input_name:String = "main") -> void:
 
 	db.close_db()
 
-func on_pressed_add_table() -> void:
+func on_pressed_add_to_table(main_text_input:TextEdit,optional_text_input:LineEdit) -> void:
 	var date_dict:Dictionary = Time.get_date_dict_from_system()
 	var data = {
 		"main_text" : main_text_input.text,
@@ -74,15 +69,18 @@ func on_pressed_add_table() -> void:
 
 	db.close_db()
 
-func on_pressed_delete_data() -> void:
+func delete_data(id) -> bool:
 	db = SQLite.new()
 	db.path = db_path
 	db.verbosity_level = logs_verbosity
 	db.open_db()
 
-	db.delete_rows("main", "id = '" + delete_id_input.text + "'") #deletes row based on id inserted
-
+	if db.delete_rows("main", "id = '" + id + "'") == true:
+		db.delete_rows("main", "id = '" + id + "'")
+	else:
+		return false
 	db.close_db()
+	return true
 
 func get_text(sqlite_id) -> Array[Dictionary]:
 		db = SQLite.new()

@@ -13,11 +13,8 @@ grow_vertical = 2
 script = ExtResource("1_dxr30")
 metadata/_edit_use_anchors_ = true
 
-[node name="DataBase" type="Node" parent="." node_paths=PackedStringArray("main_text_input", "optional_text_input", "submit_entry")]
+[node name="DataBase" type="Node" parent="."]
 script = ExtResource("1_v7np7")
-main_text_input = NodePath("../InsertNodes/BodyTextEdit")
-optional_text_input = NodePath("../InsertNodes/SummaryTextEdit")
-submit_entry = NodePath("../InsertNodes/SubmitButton")
 
 [node name="DateLabel" type="Label" parent="."]
 layout_mode = 1
@@ -31,6 +28,7 @@ grow_horizontal = 2
 text = "20 january 2024 (test date)"
 
 [node name="DisplayNodes" type="Control" parent="."]
+visible = false
 anchors_preset = 0
 anchor_right = 0.0347222
 anchor_bottom = 0.0617284
@@ -56,6 +54,13 @@ anchor_bottom = 1.6
 grow_horizontal = 2
 grow_vertical = 2
 metadata/_edit_use_anchors_ = true
+
+[node name="DeleteButton" type="Button" parent="DisplayNodes"]
+layout_mode = 0
+offset_left = 1088.0
+offset_right = 1152.0
+offset_bottom = 31.0
+text = "Delete"
 
 [node name="InsertNodes" type="Control" parent="."]
 visible = false

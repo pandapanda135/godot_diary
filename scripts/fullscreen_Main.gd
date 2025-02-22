@@ -13,9 +13,13 @@ extends Control
 @onready var insert_summary:LineEdit = $InsertNodes/SummaryTextEdit
 
 @onready var back_button:Button = $BackButton
+@onready var delete_button:Button = $DisplayNodes/DeleteButton
+@onready var submit_button:Button = $InsertNodes/SubmitButton
 
 func _ready() -> void:
 	back_button.pressed.connect(_on_back_button_pressed)
+	submit_button.pressed.connect(_on_submit_button_pressed)
+	delete_button.pressed.connect(_on_delete_button_pressed)
 
 	if SqlSettings.current_sqlite_id == 0: # insert entry
 		insert_nodes.visible = true
@@ -31,3 +35,13 @@ func _ready() -> void:
 
 func _on_back_button_pressed() -> void:
 	get_tree().change_scene_to_file("res://scene/calendar_months.tscn")
+
+func _on_submit_button_pressed() -> void:
+	db.on_pressed_add_to_table(insert_body,insert_summary)
+
+func _on_delete_button_pressed() -> void:
+	var delete = db.delete_data(str(SqlSettings.current_sqlite_id))
+	if delete == true:
+		get_tree().change_scene_to_file("res://scene/calendar_months.tscn")
+	else:
+		printerr("issue with deleting file", "id: ", SqlSettings.current_sqlite_id)
