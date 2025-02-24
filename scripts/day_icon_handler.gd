@@ -11,18 +11,18 @@ var date_dict:Dictionary = Time.get_date_dict_from_system()
 @onready var day_icon:PackedScene = preload("res://scene/day_icon.tscn")
 
 var day_count:Dictionary = {
-	1: 31,
-	2: 28,
-	3: 31,
-	4: 30,
-	5: 31,
-	6: 30,
-	7: 31,
-	8: 31,
-	9: 30,
-	10: 31,
-	11: 30,
-	12: 31,
+	1: {"month_name":"January","day_amount":31},
+	2: {"month_name":"Febuary","day_amount":28},
+	3: {"month_name":"March","day_amount":31},
+	4: {"month_name":"April","day_amount":30},
+	5: {"month_name":"May","day_amount":31},
+	6: {"month_name":"June","day_amount":30},
+	7: {"month_name":"July","day_amount":31},
+	8: {"month_name":"August","day_amount":31},
+	9: {"month_name":"September","day_amount":30},
+	10: {"month_name":"October","day_amount":31},
+	11: {"month_name":"November","day_amount":30},
+	12: {"month_name":"December","day_amount":31},
 }
 
 func _ready() -> void:
@@ -33,7 +33,7 @@ func populate_container() -> void:
 	date_dict = Time.get_date_dict_from_system()
 	current_month = calendar_handler.current_month
 	year_label.text = str(calendar_handler.current_year)
-	month_label.text = str(current_month)
+	month_label.text = str(day_count[current_month]["month_name"])
 
 	for node:Node in self.get_children(): #handles removing children on change
 		remove_child(node)
@@ -41,29 +41,32 @@ func populate_container() -> void:
 
 	if calendar_handler.current_month == Time.MONTH_FEBRUARY:
 		if calendar_handler.current_year % 4 == 0 and calendar_handler.current_year % 100 != 0 and calendar_handler.current_year % 400 != 0: # check if year divisible by 4 not divisble by 100 or 400
-			day_count[2] += 1
+			day_count[2]["day_amount"] += 1
 		elif calendar_handler.current_year % 400 == 0:# check if year divisible by 400
-			day_count[2] += 1
+			day_count[2]["day_amount"] += 1
 		else:
-			day_count[2] = 28
+			day_count[2]["day_amount"] = 28
 			print("not leap year")
 
-	for date:int in day_count[current_month]: # handles spawning nodes
+	for date:int in day_count[current_month]["day_amount"]: # handles spawning nodes
 		date += 1 # starts at 0 so add 1
 		var day_icon_node:Node = day_icon.instantiate()
+
+		#set appropriate variables
 		day_icon_node.get_node("DateLabel").text = str(date)
 		day_icon_node.delay_time = float(date) / 100
 		day_icon_node.date = date
 		day_icon_node.name = "Day%s" % date
+
 		if calendar_handler.current_year == date_dict["year"] and calendar_handler.current_month == date_dict["month"] and date == date_dict["day"]: #TODO: improve this please maybe move all code to do with changing the month/year to another script
 			day_icon_node.get_node("CurrentDayBackGround").visible = true
 			print("setting %s as current date node" % day_icon_node.name)
 
 		self.add_child(day_icon_node)
 
-	hightlight_icon()
+	highlight_icon()
 
-func hightlight_icon() -> void: # for finding if note exists on date
+func highlight_icon() -> void: # for finding if entry exists on date
 	var diary_data:Dictionary = calendar_handler.return_diary_data()
 	print(diary_data.keys())
 	for data:int in diary_data: # data = sqlite_id

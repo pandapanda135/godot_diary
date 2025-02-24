@@ -10,8 +10,8 @@ var date:int = -1
 
 func _ready() -> void:
 	$Button.pressed.connect(_on_pressed)
-	new_button.pressed.connect(_on_new_pressed)
-	view_button.pressed.connect(_on_view_pressed)
+	# new_button.pressed.connect(_on_new_pressed)
+	# view_button.pressed.connect(_on_view_pressed)
 
 	# self.scale = Vector2(0.1,0.1) # only animates if this value is higher than 1
 	self.modulate.a = 0
@@ -31,7 +31,7 @@ func _on_pressed() -> void: #? maybe use this for fullscreen entry
 		db.open_db()
 
 		var sql_date_made:Array[Dictionary] = db.select_rows("main","id == %s" % str(sqlite_id),["main_text","optional_summary","id"])
-		print(sql_date_made)
+		print("day icon",sql_date_made)
 		db.close_db()
 		SqlSettings.current_sqlite_id = sql_date_made[0]["id"]
 		get_tree().change_scene_to_file("res://scene/entry_show.tscn")
@@ -51,16 +51,6 @@ func _on_pressed() -> void: #? maybe use this for fullscreen entry
 		elif calendar_handler.current_year == date_dict["year"] and calendar_handler.current_month < date_dict["month"] and date >= date_dict["day"]:
 			print("smaller 3")
 
-func _on_new_pressed() -> void:
-	if sqlite_id != 0:
-		print("already has entry cant view")
-	else:
-		SqlSettings.current_sqlite_id = 0
-		get_tree().change_scene_to_file("res://scene/entry_show.tscn")
-
-func _on_view_pressed() -> void:
-	if sqlite_id == 0:
-		print("cant view as no entry")
-	else:
-		SqlSettings.current_sqlite_id = sqlite_id
-		get_tree().change_scene_to_file("res://scene/entry_show.tscn")
+		if calendar_handler.current_year == date_dict["year"] and calendar_handler.current_month == date_dict["month"] and date == date_dict["day"]:
+			SqlSettings.current_sqlite_id = sqlite_id
+			get_tree().change_scene_to_file("res://scene/entry_show.tscn")
