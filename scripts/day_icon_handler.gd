@@ -63,7 +63,7 @@ func populate_container() -> void:
 
 	hightlight_icon()
 
-func hightlight_icon() -> void:
+func hightlight_icon() -> void: # for finding if note exists on date
 	var diary_data:Dictionary = calendar_handler.return_diary_data()
 	print(diary_data.keys())
 	for data:int in diary_data: # data = sqlite_id

@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://cakah0vnvca6s"]
+[gd_scene load_steps=10 format=3 uid="uid://cakah0vnvca6s"]
 
 [ext_resource type="Script" path="res://scripts/calendar_ui_handler.gd" id="1_5krrb"]
 [ext_resource type="Script" path="res://scripts/day_icon_handler.gd" id="2_056d3"]
@@ -8,6 +8,7 @@
 [ext_resource type="Script" path="res://scripts/Buttons/year_back.gd" id="6_78v4j"]
 [ext_resource type="Script" path="res://scripts/Buttons/table_select_button.gd" id="7_7kbu1"]
 [ext_resource type="Script" path="res://scripts/new_table_button.gd" id="8_uw41u"]
+[ext_resource type="Script" path="res://scene/main_table_button.gd" id="9_nmdpy"]
 
 [node name="CalendarHandler" type="Control"]
 layout_mode = 3
@@ -119,6 +120,11 @@ size_flags_horizontal = 0
 size_flags_vertical = 0
 text = "New table"
 script = ExtResource("8_uw41u")
+
+[node name="MainTableButton" type="Button" parent="Buttons/TableController"]
+layout_mode = 2
+text = "Set main table (dropdown)"
+script = ExtResource("9_nmdpy")
 
 [node name="TableName" type="LineEdit" parent="Buttons/TableController"]
 layout_mode = 2

@@ -10,6 +10,9 @@ var logs_verbosity = SqlSettings.STANDARD_VERBOSITY
 var db_path: String = SqlSettings.DB_PATH #convert this to user so it saves in build
 var db:SQLite = SQLite.new()
 
+func _ready() -> void:
+	modify_master_table_row() # shouldnt overwrite value as default checks it doesnt exist I believe
+
 func return_diary_data() -> Dictionary:
 	db.path = db_path
 	db.verbosity_level = logs_verbosity
@@ -36,3 +39,29 @@ func return_all_tables() -> Array[Dictionary]:
 	var query_result:Array[Dictionary] = db.select_rows(column_name,"",["tbl_name"])
 	db.close_db()
 	return query_result
+
+func modify_master_table_row() -> void:
+	db = SQLite.new()
+	db.path = db_path
+	db.verbosity_level = logs_verbosity
+	db.open_db()
+
+	var new_row:Dictionary = {
+		"default_table": {"data_type": "text","not_null": true,"default": "main"},
+	}
+
+	db.create_table("user_config",new_row)
+	db.close_db()
+
+func modify_master_table_value(inserted_table:String) -> void:
+	db = SQLite.new()
+	db.path = db_path
+	db.verbosity_level = logs_verbosity
+	db.open_db()
+
+	var data:Dictionary = {
+		"default_table": inserted_table
+	}
+	var last_value:Array[Dictionary] = db.select_rows("user_config","",["default_table"])
+	db.update_rows("user_config","default_table = '%s'" % last_value[0]["default_table"], data) # uses last value of coloum as otherwise dont work
+	db.close_db()
