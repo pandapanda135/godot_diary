@@ -11,8 +11,8 @@ var date_dict:Dictionary = Time.get_date_dict_from_system()
 @onready var day_icon:PackedScene = preload("res://scene/day_icon.tscn")
 
 var day_count:Dictionary = {
-	1: {"month_name":"January","day_amount":31},
-	2: {"month_name":"Febuary","day_amount":28},
+	1: {"month_name":"January","day_amount":31,},
+	2: {"month_name":"Febuary","day_amount":28,},
 	3: {"month_name":"March","day_amount":31},
 	4: {"month_name":"April","day_amount":30},
 	5: {"month_name":"May","day_amount":31},

@@ -1,8 +1,9 @@
 extends Control
 
-@onready var calendar_handler = $"/root/CalendarHandler"
-@onready var new_button = $HoverControl/HoverContainer/NewButton
-@onready var view_button = $HoverControl/HoverContainer/ViewButton
+@onready var calendar_handler:Control = $"/root/CalendarHandler"
+@onready var new_button:Button = $HoverControl/HoverContainer/NewButton
+@onready var view_button:Button  = $HoverControl/HoverContainer/ViewButton
+@onready var back_ground:Panel = $CurrentDayBackGround
 
 var delay_time:float
 var sqlite_id:int = 0
@@ -13,12 +14,12 @@ func _ready() -> void:
 	# new_button.pressed.connect(_on_new_pressed)
 	# view_button.pressed.connect(_on_view_pressed)
 
-	# self.scale = Vector2(0.1,0.1) # only animates if this value is higher than 1
+	back_ground.scale = Vector2(0.1,0.1) # only animates if this value is higher than 1
 	self.modulate.a = 0
 	await get_tree().create_timer(delay_time).timeout
 	var tween:Tween = self.create_tween()
 	tween.parallel().tween_property(self, "modulate:a",1,0.15)
-	# tween.parallel().tween_property(self, "scale",Vector2(1,1),0.25).set_trans(Tween.TRANS_QUAD)
+	tween.parallel().tween_property(back_ground, "scale",Vector2(1,1),0.25).set_trans(Tween.TRANS_QUAD)
 
 var logs_verbosity:int = SqlSettings.STANDARD_VERBOSITY
 var db_path: String = SqlSettings.DB_PATH #convert this to user so it saves in build
