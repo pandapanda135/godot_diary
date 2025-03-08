@@ -10,7 +10,7 @@ static var logs_verbosity = SqlSettings.STANDARD_VERBOSITY
 
 static var db:SQLite = null
 
-static var db_path := SqlSettings.DB_PATH
+static var db_path := SqlSettings.SAVE_DB_PATH
 #from demo keep json file for user select backup later
 static var packaged_db_path := SqlSettings.PACKAGED_DB_NAME
 static var peristent_db_path := SqlSettings.SAVE_DB_PATH #use for build
@@ -51,7 +51,7 @@ static func create_table(input_name:String = "main") -> void:
 
 func on_pressed_add_to_table(main_text_input:TextEdit,optional_text_input:LineEdit) -> void:
 	var date_dict:Dictionary = Time.get_date_dict_from_system()
-	var data = {
+	var data:Dictionary = {
 		"main_text" : main_text_input.text,
 		"optional_summary" : optional_text_input.text,
 		"year_made" : date_dict["year"],

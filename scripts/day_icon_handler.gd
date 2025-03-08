@@ -1,8 +1,8 @@
 extends Node
 
-@onready var calendar_handler:Control = $"/root/CalendarHandler"
-@onready var year_label:Control = $"/root/CalendarHandler/YearLabel"
-@onready var month_label:Control = $"/root/CalendarHandler/MonthLabel"
+@onready var calendar_handler:Control = $"/root/Main/CalendarHandler"
+@onready var year_label:Control = $"/root/Main/CalendarHandler/YearLabel"
+@onready var month_label:Control = $"/root/Main/CalendarHandler/MonthLabel"
 
 var date_dict:Dictionary = Time.get_date_dict_from_system()
 

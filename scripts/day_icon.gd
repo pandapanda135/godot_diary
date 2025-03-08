@@ -1,6 +1,6 @@
 extends Control
 
-@onready var calendar_handler:Control = $"/root/CalendarHandler"
+@onready var calendar_handler:Control = $"/root/Main/CalendarHandler"
 @onready var new_button:Button = $HoverControl/HoverContainer/NewButton
 @onready var view_button:Button  = $HoverControl/HoverContainer/ViewButton
 @onready var back_ground:Panel = $CurrentDayBackGround
@@ -22,16 +22,16 @@ func _ready() -> void:
 	tween.parallel().tween_property(back_ground, "scale",Vector2(1,1),0.25).set_trans(Tween.TRANS_QUAD)
 
 var logs_verbosity:int = SqlSettings.STANDARD_VERBOSITY
-var db_path: String = SqlSettings.DB_PATH #convert this to user so it saves in build
+var db_path: String = SqlSettings.SAVE_DB_PATH #convert this to user so it saves in build
 var db:SQLite = SQLite.new()
 
-func _on_pressed() -> void: #? maybe use this for fullscreen entry
+func _on_pressed() -> void: # used for fullscreen entry
 	if sqlite_id != 0:
 		db.path = db_path
 		db.verbosity_level = logs_verbosity
 		db.open_db()
 
-		var sql_date_made:Array[Dictionary] = db.select_rows("main","id == %s" % str(sqlite_id),["main_text","optional_summary","id"])
+		var sql_date_made:Array[Dictionary] = db.select_rows(SqlSettings.current_table,"id == %s" % str(sqlite_id),["main_text","optional_summary","id"])
 		print("day icon",sql_date_made)
 		db.close_db()
 		SqlSettings.current_sqlite_id = sql_date_made[0]["id"]

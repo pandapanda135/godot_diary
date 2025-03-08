@@ -1,8 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://4apy4wtf30mn"]
+[gd_scene load_steps=3 format=3 uid="uid://4apy4wtf30mn"]
 
 [ext_resource type="Script" path="res://scripts/main.gd" id="1_hri17"]
-[ext_resource type="Script" path="res://scripts/database.gd" id="2_jf3kd"]
-[ext_resource type="Script" path="res://scripts/Buttons/button_class.gd" id="3_7u75w"]
+[ext_resource type="PackedScene" uid="uid://cakah0vnvca6s" path="res://scene/calendar_months.tscn" id="2_qejjp"]
 
 [node name="Main" type="Control"]
 layout_mode = 3
@@ -13,91 +12,5 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_hri17")
 
-[node name="Database" type="Node" parent="."]
-script = ExtResource("2_jf3kd")
-
-[node name="Label" type="Label" parent="."]
-layout_mode = 0
-offset_right = 1152.0
-offset_bottom = 38.0
-text = "This is a test"
-horizontal_alignment = 1
-vertical_alignment = 1
-
-[node name="CreateTable" type="Button" parent="."]
-layout_mode = 0
-anchor_left = 0.0078125
-anchor_top = 0.0987654
-anchor_right = 0.12934
-anchor_bottom = 0.146605
-text = "create table
-"
-metadata/_edit_use_anchors_ = true
-
-[node name="TextEdit" type="TextEdit" parent="."]
-layout_mode = 0
-anchor_left = 0.19184
-anchor_top = 0.0740741
-anchor_right = 0.355903
-anchor_bottom = 0.189815
-metadata/_edit_use_anchors_ = true
-
-[node name="AddTable" type="Button" parent="."]
-layout_mode = 0
-anchor_left = 0.0078125
-anchor_top = 0.405864
-anchor_right = 0.12934
-anchor_bottom = 0.453704
-text = "add row
-"
-metadata/_edit_use_anchors_ = true
-
-[node name="MainText" type="TextEdit" parent="."]
-layout_mode = 0
-anchor_left = 0.19184
-anchor_top = 0.381173
-anchor_right = 0.355903
-anchor_bottom = 0.496914
-metadata/_edit_use_anchors_ = true
-
-[node name="OptionalText" type="TextEdit" parent="."]
-layout_mode = 0
-anchor_left = 0.434028
-anchor_top = 0.381173
-anchor_right = 0.59809
-anchor_bottom = 0.496914
-metadata/_edit_use_anchors_ = true
-
-[node name="DeleteData" type="Button" parent="."]
-layout_mode = 0
-anchor_left = 0.0078125
-anchor_top = 0.683642
-anchor_right = 0.12934
-anchor_bottom = 0.731481
-text = "delete row
-"
-metadata/_edit_use_anchors_ = true
-
-[node name="DeleteIdInput" type="TextEdit" parent="."]
-layout_mode = 0
-anchor_left = 0.19184
-anchor_top = 0.658951
-anchor_right = 0.355903
-anchor_bottom = 0.774691
-metadata/_edit_use_anchors_ = true
-
-[node name="TableLabel" type="RichTextLabel" parent="."]
-layout_mode = 0
-offset_left = 706.0
-offset_top = 48.0
-offset_right = 883.0
-offset_bottom = 386.0
-
-[node name="CalendarButton" type="Button" parent="."]
-layout_mode = 0
-anchor_left = 0.884549
-anchor_right = 1.0
-anchor_bottom = 0.0478395
-text = "Toggle Calendar"
-script = ExtResource("3_7u75w")
-metadata/_edit_use_anchors_ = true
+[node name="CalendarHandler" parent="." instance=ExtResource("2_qejjp")]
+layout_mode = 1

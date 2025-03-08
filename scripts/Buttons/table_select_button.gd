@@ -1,11 +1,13 @@
 extends OptionButton
 
-@onready var calendar_handler:Control = $"/root/CalendarHandler"
-@onready var day_container:Control = $"/root/CalendarHandler/DayContainer"
+@onready var calendar_handler:Control = $"/root/Main/CalendarHandler"
+@onready var day_container:Control = $"/root/Main/CalendarHandler/DayContainer"
 
 static var default_table:String = SqliteSettings.return_default_table() # using class as static func
 
 func _ready():
+	if default_table == "":
+		Database.create_table()
 	print("LOOK AT THIS", SqlSettings.current_table)
 	_on_pressed()
 	self.pressed.connect(_on_pressed)
@@ -18,6 +20,9 @@ func _ready():
 				print(self.get_item_text(count)," is current table name")
 				self.selected = count
 				break
+			elif default_table == "":
+				self.selected = 0
+				calendar_handler.modify_master_table_value("")
 			else:
 				if self.get_item_text(count) == SqlSettings.current_table: # set selected if not default table but was last selected table
 					self.selected = count

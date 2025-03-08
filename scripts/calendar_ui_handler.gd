@@ -7,7 +7,7 @@ var date_dict:Dictionary = Time.get_date_dict_from_system()
 @export var current_date:int = date_dict["day"]
 
 var logs_verbosity = SqlSettings.STANDARD_VERBOSITY
-var db_path: String = SqlSettings.DB_PATH #convert this to user so it saves in build
+var db_path: String = SqlSettings.SAVE_DB_PATH #convert this to user so it saves in build
 var db:SQLite = SQLite.new()
 
 func _ready() -> void:
@@ -62,6 +62,11 @@ func modify_master_table_value(inserted_table:String) -> void:
 	var data:Dictionary = {
 		"default_table": inserted_table
 	}
+
 	var last_value:Array[Dictionary] = db.select_rows("user_config","",["default_table"])
-	db.update_rows("user_config","default_table = '%s'" % last_value[0]["default_table"], data) # uses last value of coloum as otherwise dont work
+	print("Last Value",last_value)
+	if inserted_table != "" and last_value != []: # fix issue with not being filled
+		db.update_rows("user_config","default_table = '%s'" % last_value[0]["default_table"], data) # uses last value of column as otherwise dont work
+	else:
+		db.insert_row("user_config",{"default_table":"main"})
 	db.close_db()

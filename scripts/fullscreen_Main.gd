@@ -34,7 +34,7 @@ func _ready() -> void:
 		summary_node.text = str(sqlite_data["optional_summary"])
 
 func _on_back_button_pressed() -> void:
-	get_tree().change_scene_to_file("res://scene/calendar_months.tscn")
+	get_tree().change_scene_to_file("res://scene/main.tscn")
 
 func _on_submit_button_pressed() -> void:
 	db.on_pressed_add_to_table(insert_body,insert_summary)
@@ -42,6 +42,6 @@ func _on_submit_button_pressed() -> void:
 func _on_delete_button_pressed() -> void:
 	var delete = db.delete_data(str(SqlSettings.current_sqlite_id))
 	if delete == true:
-		get_tree().change_scene_to_file("res://scene/calendar_months.tscn")
+		get_tree().change_scene_to_file("res://scene/main.tscn")
 	else:
 		printerr("issue with deleting file", "id: ", SqlSettings.current_sqlite_id)
