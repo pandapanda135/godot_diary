@@ -4,7 +4,7 @@ class_name SqliteSettings
 const STANDARD_VERBOSITY = SQLite.VERBOSE
 const DEV_DB_PATH := "res://data"
 const PACKAGED_DB_NAME := "res://database_pack"
-const SAVE_DB_PATH = "user://database" #use for build
+const SAVE_DB_PATH = "res://data" #use for build ("user://database") #TODO: change this back
 const JSON_BACKUP := "res://data/database_backup"
 
 const BLOCKED_TABLE_NAMES:Array[String] = ["user_config","sqlite_sequence",]

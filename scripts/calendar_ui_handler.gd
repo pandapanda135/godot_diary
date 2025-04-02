@@ -5,6 +5,14 @@ var date_dict:Dictionary = Time.get_date_dict_from_system()
 @export var current_year:int = date_dict["year"] # these handle the calendar and are changed if the selected date on the calendar is
 @export var current_month:int = date_dict["month"]
 @export var current_date:int = date_dict["day"]
+@export var current_weekday:int = date_dict["weekday"]
+
+var current_day_dict:Dictionary = {
+	"year":current_year,
+	"month":current_month,
+	"day":current_date,
+	"weekday":current_weekday,
+}
 
 var logs_verbosity = SqlSettings.STANDARD_VERBOSITY
 var db_path: String = SqlSettings.SAVE_DB_PATH #convert this to user so it saves in build
@@ -70,3 +78,11 @@ func modify_master_table_value(inserted_table:String) -> void:
 	else:
 		db.insert_row("user_config",{"default_table":"main"})
 	db.close_db()
+
+func update_day_dict() -> void: # gets updated for day icon highlight if current day
+	current_day_dict = {
+	"year":current_year,
+	"month":current_month,
+	"day":current_date,
+	"weekday":current_weekday,
+}

@@ -30,6 +30,7 @@ func _ready() -> void:
 	populate_container()
 
 func populate_container() -> void:
+	calendar_handler.update_day_dict()
 	date_dict = Time.get_date_dict_from_system()
 	current_month = calendar_handler.current_month
 	year_label.text = str(calendar_handler.current_year)
@@ -58,8 +59,8 @@ func populate_container() -> void:
 		day_icon_node.date = date
 		day_icon_node.name = "Day%s" % date
 
-		if calendar_handler.current_year == date_dict["year"] and calendar_handler.current_month == date_dict["month"] and date == date_dict["day"]: #TODO: improve this please maybe move all code to do with changing the month/year to another script
-			day_icon_node.get_node("CurrentDayBackGround").visible = true
+		if calendar_handler.current_day_dict == date_dict and calendar_handler.current_date == date: #TODO: Could probably improve this further but its good enough
+			day_icon_node.get_node("CurrentDayBackGround").visible = true # set if current day
 			print("setting %s as current date node" % day_icon_node.name)
 
 		self.add_child(day_icon_node)
