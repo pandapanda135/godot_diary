@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://4apy4wtf30mn"]
 
-[ext_resource type="Script" path="res://scripts/main.gd" id="1_hri17"]
+[ext_resource type="Script" uid="uid://drnqhgu4oix8e" path="res://scripts/main.gd" id="1_hri17"]
 [ext_resource type="PackedScene" uid="uid://cakah0vnvca6s" path="res://scene/calendar_months.tscn" id="2_qejjp"]
 
 [node name="Main" type="Control"]

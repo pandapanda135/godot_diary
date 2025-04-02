@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bu78t6k7r7ix2"]
 
-[ext_resource type="Script" path="res://scripts/fullscreen_Main.gd" id="1_dxr30"]
-[ext_resource type="Script" path="res://scripts/database.gd" id="1_v7np7"]
+[ext_resource type="Script" uid="uid://5v5kglfgejjw" path="res://scripts/fullscreen_Main.gd" id="1_dxr30"]
+[ext_resource type="Script" uid="uid://thowd8efy7od" path="res://scripts/database.gd" id="1_v7np7"]
 
 [node name="Main" type="Control"]
 layout_mode = 3

@@ -16,7 +16,7 @@ static var packaged_db_path := SqlSettings.PACKAGED_DB_NAME
 static var peristent_db_path := SqlSettings.SAVE_DB_PATH #use for build
 static var json_name := SqlSettings.JSON_BACKUP
 
-@onready var create_table_button:Button = $"../CreateTable"
+@onready var create_table_button:Button = $"../CreateTable" # TODO: I believe this is old code that can be removed look into this a bit further before we do it
 @onready var add_table_button:Button = $"../AddTable"
 
 @onready var delete_data_button:Button = $"../DeleteData"
@@ -75,10 +75,11 @@ func delete_data(id) -> bool:
 	db.verbosity_level = logs_verbosity
 	db.open_db()
 
-	if db.delete_rows("%s", "id = '" + id + "'" % SqlSettings.current_table) == true:
-		db.delete_rows("%s", "id = '" + id + "'" % SqlSettings.current_table)
+	if db.delete_rows("%s" % SqlSettings.current_table, "id = '" + id + "'"):
+		db.delete_rows("%s" % SqlSettings.current_table, "id = '" + id + "'")
 	else:
 		return false
+
 	db.close_db()
 	return true
 
