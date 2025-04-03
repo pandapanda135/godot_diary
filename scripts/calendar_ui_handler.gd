@@ -7,12 +7,15 @@ var date_dict:Dictionary = Time.get_date_dict_from_system()
 @export var current_date:int = date_dict["day"]
 @export var current_weekday:int = date_dict["weekday"]
 
-var current_day_dict:Dictionary = {
+var current_day_dict:Dictionary[String,int] = {
 	"year":current_year,
 	"month":current_month,
 	"day":current_date,
 	"weekday":current_weekday,
 }
+
+#YYYY-MM-DDTHH:MM:SS
+var iso_string_format:String = "{YYYY}-{MM}-{DD}T{HH}:{MI}:{SS}"
 
 var logs_verbosity = SqlSettings.STANDARD_VERBOSITY
 var db_path: String = SqlSettings.SAVE_DB_PATH #convert this to user so it saves in build
@@ -79,10 +82,14 @@ func modify_master_table_value(inserted_table:String) -> void:
 		db.insert_row("user_config",{"default_table":"main"})
 	db.close_db()
 
-func update_day_dict() -> void: # gets updated for day icon highlight if current day
+func update_day_dict() -> Dictionary[String,int]: # gets updated for day icon highlight if current day
 	current_day_dict = {
 	"year":current_year,
 	"month":current_month,
 	"day":current_date,
 	"weekday":current_weekday,
 }
+	return current_day_dict
+
+func datetime_string_formatter(year:int,month:int,day:int) -> String:
+	return iso_string_format.format({"YYYY":str(year),"MM":str(month),"DD":str(day),"HH":str(0),"MI":str(0),"SS":str(01)})

@@ -5,12 +5,11 @@ extends Node
 @onready var month_label:Control = $"/root/Main/CalendarHandler/MonthLabel"
 
 var date_dict:Dictionary = Time.get_date_dict_from_system()
-
 @export var current_month:int = date_dict["month"]
 
 @onready var day_icon:PackedScene = preload("res://scene/day_icon.tscn")
 
-var day_count:Dictionary = {
+var day_count:Dictionary[int,Dictionary] = {
 	1: {"month_name":"January","day_amount":31,},
 	2: {"month_name":"Febuary","day_amount":28,},
 	3: {"month_name":"March","day_amount":31},
@@ -30,7 +29,7 @@ func _ready() -> void:
 	populate_container()
 
 func populate_container() -> void:
-	calendar_handler.update_day_dict()
+	var calendar_day_dict:Dictionary[String,int] = calendar_handler.update_day_dict()
 	date_dict = Time.get_date_dict_from_system()
 	current_month = calendar_handler.current_month
 	year_label.text = str(calendar_handler.current_year)
@@ -49,9 +48,36 @@ func populate_container() -> void:
 			day_count[2]["day_amount"] = 28
 			print("not leap year")
 
-	for date:int in day_count[current_month]["day_amount"]: # handles spawning nodes
+	var datetime_string_first:Dictionary = get_selected_datetime(calendar_handler.datetime_string_formatter(calendar_day_dict["year"],calendar_day_dict["month"],1))
+	var datetime_string_last:Dictionary = get_selected_datetime(calendar_handler.datetime_string_formatter(calendar_day_dict["year"],calendar_day_dict["month"],day_count[current_month]["day_amount"]))
+	printerr(datetime_string_first, " || " ,datetime_string_last)
+	var has_checked_last_month:bool = false
+	for date:int in day_count[5]["day_amount"]: # handles spawning nodes
 		date += 1 # starts at 0 so add 1
+		printerr(date)
 		var day_icon_node:Node = day_icon.instantiate()
+
+		if datetime_string_first["weekday"] >= 1 and has_checked_last_month == false:
+			has_checked_last_month = true
+			date = day_count[4]["day_amount"]
+			var day_icon_node_previous:Node = day_icon.instantiate()
+			for i:int in datetime_string_first["weekday"]:
+				printerr(i," || ", datetime_string_first["weekday"], " || ",date)
+				if i == 0:
+					pass
+				elif date - 1 == datetime_string_first["weekday"] - day_count[4]["day_amount"]:
+					break
+				else:
+					date -= i
+
+				day_icon_node_previous.get_node("DateLabel").text = str(date)
+				day_icon_node_previous.date = date
+				day_icon_node_previous.name = "PreviousDay%s" % date
+
+				self.add_child(day_icon_node_previous)
+			date = 1
+			# continue
+		print("got to line 80 ", date)
 
 		#set appropriate variables
 		day_icon_node.get_node("DateLabel").text = str(date)
@@ -59,7 +85,7 @@ func populate_container() -> void:
 		day_icon_node.date = date
 		day_icon_node.name = "Day%s" % date
 
-		if calendar_handler.current_day_dict == date_dict and calendar_handler.current_date == date: #TODO: Could probably improve this further but its good enough
+		if calendar_day_dict == date_dict and calendar_handler.current_date == date: #TODO: Could probably improve this further but its good enough
 			day_icon_node.get_node("CurrentDayBackGround").visible = true # set if current day
 			print("setting %s as current date node" % day_icon_node.name)
 
@@ -76,3 +102,6 @@ func highlight_icon() -> void: # for finding if entry exists on date
 			var node:Control = self.get_node("Day%s" % nested_dict["day_made"])
 			node.sqlite_id = nested_dict["id"]
 			node.get_node("EntryLabel").visible = true
+
+func get_selected_datetime(datetime_string:String) -> Dictionary:
+	return Time.get_datetime_dict_from_datetime_string(datetime_string,true)
