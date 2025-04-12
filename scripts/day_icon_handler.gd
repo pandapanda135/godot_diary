@@ -34,6 +34,7 @@ func populate_container() -> void:
 	current_month = calendar_handler.current_month
 	year_label.text = str(calendar_handler.current_year)
 	month_label.text = str(day_count[current_month]["month_name"])
+	var previous_day_nodes:Array[Control]
 
 	for node:Node in self.get_children(): #handles removing children on change
 		remove_child(node)
@@ -52,32 +53,44 @@ func populate_container() -> void:
 	var datetime_string_last:Dictionary = get_selected_datetime(calendar_handler.datetime_string_formatter(calendar_day_dict["year"],calendar_day_dict["month"],day_count[current_month]["day_amount"]))
 	printerr(datetime_string_first, " || " ,datetime_string_last)
 	var has_checked_last_month:bool = false
-	for date:int in day_count[5]["day_amount"]: # handles spawning nodes
+	for date:int in day_count[current_month]["day_amount"]: # handles spawning nodes
 		date += 1 # starts at 0 so add 1
 		printerr(date)
 		var day_icon_node:Node = day_icon.instantiate()
 
+		#Handles adding previous months days
 		if datetime_string_first["weekday"] >= 1 and has_checked_last_month == false:
 			has_checked_last_month = true
-			date = day_count[4]["day_amount"]
-			var day_icon_node_previous:Node = day_icon.instantiate()
+			date = day_count[current_month - 1]["day_amount"]
 			for i:int in datetime_string_first["weekday"]:
+				var day_icon_node_previous:Node = day_icon.instantiate()
 				printerr(i," || ", datetime_string_first["weekday"], " || ",date)
 				if i == 0:
 					pass
-				elif date - 1 == datetime_string_first["weekday"] - day_count[4]["day_amount"]:
+				elif date - 1 == datetime_string_first["weekday"] - day_count[current_month - 1]["day_amount"]: # idk what this does tbh
 					break
 				else:
-					date -= i
+					date -= 1
 
 				day_icon_node_previous.get_node("DateLabel").text = str(date)
 				day_icon_node_previous.date = date
 				day_icon_node_previous.name = "PreviousDay%s" % date
 
 				self.add_child(day_icon_node_previous)
+				previous_day_nodes.push_back(day_icon_node_previous) # must push back as reorder will not work
 			date = 1
-			# continue
+			# reorder nodes
+			var current_node_index:int = 0
+			for node:Control in previous_day_nodes:
+				if node.date < day_count[current_month - 1]["day_amount"]:
+					self.move_child(node,0)
+					current_node_index += 1
+				elif node.date == day_count[current_month - 1]["day_amount"]:
+					self.move_child(node,current_node_index)
+					current_node_index += 1
+
 		print("got to line 80 ", date)
+
 
 		#set appropriate variables
 		day_icon_node.get_node("DateLabel").text = str(date)
